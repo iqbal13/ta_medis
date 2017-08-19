@@ -65,11 +65,6 @@
 
                  	</div>
 
-                 	<div class="form-group">
-                 	<label> Tanggal Lahir </label>
-                 	<input type="date" name="tanggal_lahir" class="form-control">
-                 	</div>           
-
                  	      	<button class="btn btn-primary" type="button" id="btncek"> Cek Data </button>
                  		<div class="lagi_loading"> </div>
                  		<div class="hasilnya"></div>
@@ -101,28 +96,28 @@
 
                     <div class="form-group">
                     	<label> Nama Pasien </label>
-                    	<input type="text" name="nama_pasien" class="form-control">
+                    	<input type="text" name="nama_pasien" id="nama_pasien" class="form-control">
 
                     </div>
 
 
                     <div class="form-group">
                     	<label> Tempat Tanggal Lahir </label>
-                    	<input type="date" name="ttl" class="form-control">
+                    	<input type="date" name="ttl" class="form-control" id="ttl">
 
                     </div>
 
 
                     <div class="form-group">
                     	<label> Alamat </label>
-                    	<input type="text" name="alamat" class="form-control">
+                    	<input type="text" name="alamat" class="form-control" id="alamat">
 
                     </div>
 
 
                     <div class="form-group">
                     	<label> Nomor Kontak </label>
-                    	<input type="text" name="nomor_kontak" class="form-control">
+                    	<input type="text" name="nomor_kontak" class="form-control" id="nomor_kontak">
 
                     </div>
 
@@ -149,7 +144,7 @@
 
                     <div class="form-group">
                     	<label> Pilih Dokter </label>
-                    	<select class="form-control" name="id_dokter" id="pilih_dokter" onchange="pilih_dokter(this.value)">
+                    	<select class="form-control" name="id_dokter" id="pilih_dokter" onchange="cari_waktu(this.value)">
                     	<option value=""> Pilih Dokter </option>
                     	</select>
                     </div>
@@ -179,13 +174,8 @@
                 <div id="step-4" class="">
                     <h2>Step 4 Content</h2>
                     <div class="panel panel-default">
-                        <div class="panel-heading">My Details</div>
-                        <table class="table" id="data-nyaisi">
-                            <tbody>
-                                <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                            </tbody>
-                        </table>
+                    <div id="hasildaftar"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -303,9 +293,9 @@
         }
 
 
-          function pilih_dokter(dt){
-          	alert(dt);
-        	var datanya = "id_dokter="+dt+"&tipe=dokter";
+          function cari_waktu(dx){
+          	alert(dx);
+        	var datanya = "id_dokter="+dx+"&tipe=dokter";
         	$.ajax({
         		type:"POST",
         		url:"<?php echo $url ?>ajax.php",
@@ -325,7 +315,7 @@
         		url:"<?php echo $url ?>ajax.php",
         		data:datanya,
         		beforeSend:function(){
-        			$(".lagi_loading").html("Sabar ...pengecekan data");
+        			$(".lagi_loading").html("Mohon Menunggu ...pengecekan data");
         		},success:function(dt){
         			$(".lagi_loading").html("");
         			$(".hasilnya").html(dt);
@@ -336,7 +326,19 @@
 
         function submitdata(){
         var nilai = $("#form-registrasi").serialize();
-        alert(nilai);
+
+          $.ajax({
+            type:"POST",
+            url:"<?php echo $url ?>proses.php",
+            data:nilai,
+            beforeSend:function(){
+
+            },success:function(dx){
+             // alert(dx);
+             $("#hasildaftar").html(dx);
+            }
+          })
+
         }
     </script>  
 </body>
