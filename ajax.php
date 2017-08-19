@@ -25,7 +25,8 @@
 			}else{
 				echo "<h3> Data Ditemukan : Selamat datang ".$hasil['nama_pasien']."</h3> <br /> Klik next untuk melanjutkan ";
 				?>
-				<script>
+				<script>             
+				   $(".sw-btn-next").show();
 				$("#nomor_rekam_2").val("<?php echo $hasil['nomor_rekam'] ?>");
 				$("#nama_pasien").val("<?php echo $hasil['nama_pasien'] ?>");
 				$("#ttl").val("<?php echo $hasil['ttl'] ?>");
