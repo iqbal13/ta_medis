@@ -8,6 +8,10 @@
 
 
 			$nomor_rekam = $_POST['nomor_rekam'];
+			if($nomor_rekam == ""){
+				echo "Harap Isikan Nomor Rekam terlebih dahulu";
+				exit;
+			}
 			$query = "SELECT * from pasien WHERE nomor_rekam = '$nomor_rekam'";
 			$cek  = mysqli_query($db,$query);
 			$hasil = mysqli_fetch_array($cek);
@@ -16,12 +20,18 @@
 			if($cz == 0){
 
 				echo "<h3> Data Tidak Ditemukan </h3>";
+				echo "<p> Silahkan ubah jenis pasien menjadi <strong> Baru </strong> untuk melanjutkan pendaftaran </p>";
 
 			}else{
+				echo "<h3> Data Ditemukan : Selamat datang ".$hasil['nama_pasien']."</h3> <br /> Klik next untuk melanjutkan ";
 				?>
 				<script>
 				$("#nomor_rekam_2").val("<?php echo $hasil['nomor_rekam'] ?>");
-				</script>
+				$("#nama_pasien").val("<?php echo $hasil['nama_pasien'] ?>");
+				$("#ttl").val("<?php echo $hasil['ttl'] ?>");
+				$("#alamat").val("<?php echo $hasil['alamat'] ?>");
+				$("#nomor_kontak").val("<?php echo $hasil['nomor_kontak'] ?>");
+								</script>
 
 				<?php
 			}
