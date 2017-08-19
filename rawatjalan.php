@@ -161,12 +161,16 @@
                     <div class="form-group">
                     	<label> Cara Bayar </label>
                     	<select name="cara_bayar" class="form-control" id="cara_bayar">
-                    	<option value="1"> JKN </option>
-                    	<option value="2"> BPJS </option>
-                    	<option value="3"> TUNAI </option>
+                    	<option value="jkn"> JKN </option>
+                    	<option value="bpjs"> BPJS </option>
+                    	<option value="tunai"> TUNAI </option>
                     	</select>
                     </div>
                    		</form>
+                  
+
+                  <h3> <div class="loading-daftar"> </div> </h3>
+
                  </div>
 
                      <div class="clearfix"> </div>
@@ -205,10 +209,17 @@
                }
 
               	if(stepNumber != 2){
-              		$(".daftar-btn").hide();
+              		$(".daftar-btn").hide();                
+
               	}else{
-              		$(".daftar-btn").show();
+              		$(".daftar-btn").show();         
+                              $(".sw-btn-next").hide();
+
               	}
+
+                if(stepNumber == 1){
+                             $(".sw-btn-next").hide();
+                }
 
 
                if(stepPosition === 'first'){
@@ -226,7 +237,7 @@
             // Toolbar extra buttons
             var btnFinish = $('<button></button>').text('Finish')
                                              .addClass('btn btn-info finishbtn')
-                                             .on('click', function(){  });
+                                             .on('click', function(){ window.location.reload() });
             var btnCancel = $('<button></button>').text('Cancel')
                                              .addClass('btn btn-danger')
                                              .on('click', function(){ $('#smartwizard').smartWizard("reset"); });  
@@ -269,11 +280,13 @@
 
         function jenispasien(a){
         	if(a == 2){
-        		$(".untuklama").hide();
+        		$(".untuklama").hide();          
+            $(".sw-btn-next").show();
         		$("#nomor_rekam_2").val("A13-<?php echo rand(0,100) ?>");	
         	}else{
         		$(".untuklama").show();
         		$("#nomor_rekam").val("");
+            $(".sw-btn-next").hide();
 
         	}
 
@@ -318,7 +331,8 @@
         			$(".lagi_loading").html("Mohon Menunggu ...pengecekan data");
         		},success:function(dt){
         			$(".lagi_loading").html("");
-        			$(".hasilnya").html(dt);
+        			$(".hasilnya").html(dt);          
+
         		}
         	})
 
@@ -332,9 +346,10 @@
             url:"<?php echo $url ?>proses.php",
             data:nilai,
             beforeSend:function(){
-
+              $(".loading-daftar").html("Data Sedang disubmit.. silahkan tunggu");
             },success:function(dx){
              // alert(dx);
+             $(".loading-daftar").html("");
              $("#hasildaftar").html(dx);
             }
           })
