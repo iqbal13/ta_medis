@@ -15,34 +15,28 @@ include 'partial/head.php';
 
 <div class="row" style="margin-top: 0px !important;">
 <div class="col-md-12" style="margin-bottom: 400px;">
-<h1 class="text-center"> Data Pasien </h1>
+<h1 class="text-center"> Data User </h1>
 
 <br />
 <table class="table table-striped" id="data-registrasi">
 <thead>
 <tr>
 <th> No </th>
-<th> Nomor Rekam </th>
-<th> Nama Pasien </th>
-<th> Tanggal Lahir </th>
-<th> Alamat </th>
-<th> Nomor Kontak </th>
+<th> Username </th>
+<th> Nama User</th>
 <th> Aksi </th>
 </thead>
 <tbody>
 <?php 
-$query = "SELECT * FROM pasien "; 
+$query = "SELECT * FROM users "; 
 // echo $query;
 $run_query = mysqli_query($db,$query);
 $no = 1;
 while($dt = mysqli_fetch_array($run_query)){ ?>
 <tr>
 <td> <?php echo $no++ ?> </td>
-<td> <?php echo $dt['nomor_rekam'] ?> </td>
-<td> <?php echo $dt['nama_pasien'] ?> </td>
-<td> <?php echo $dt['ttl'] ?> </td>
-<td> <?php echo $dt['alamat'] ?> </td>
-<td> <?php echo $dt['nomor_kontak']  ?> </td>
+<td> <?php echo $dt['username'] ?> </td>
+<td> <?php echo $dt['nama_user'] ?> </td>
 <td> <a href="<?php echo $url ?>pasien.php?aksi=edit&nomor_rekam=<?php echo $dt['nomor_rekam'] ?>"> Edit </a> 
 <a href="<?php echo $url ?>pasien.php?aksi=hapus&nomor_rekam=<?php echo $dt['nomor_rekam'] ?>" onclick="return confirm('Yakin hapus data ini ? ')"> Hapus </a>  </td>
 </tr>
