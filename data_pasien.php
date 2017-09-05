@@ -16,7 +16,7 @@ include 'partial/head.php';
 <div class="row" style="margin-top: 0px !important;">
 <div class="col-md-12" style="margin-bottom: 400px;">
 <h1 class="text-center"> Data Pasien </h1>
-
+<a class="btn btn-primary pull-left" href="edit_pasien.php"> Tambah Pasien </a>
 <br />
 <table class="table table-striped" id="data-registrasi">
 <thead>
@@ -27,6 +27,7 @@ include 'partial/head.php';
 <th> Tanggal Lahir </th>
 <th> Alamat </th>
 <th> Nomor Kontak </th>
+<th> Jenis Kelamin </th>
 <th> Aksi </th>
 </thead>
 <tbody>
@@ -43,8 +44,9 @@ while($dt = mysqli_fetch_array($run_query)){ ?>
 <td> <?php echo $dt['ttl'] ?> </td>
 <td> <?php echo $dt['alamat'] ?> </td>
 <td> <?php echo $dt['nomor_kontak']  ?> </td>
-<td> <a href="<?php echo $url ?>pasien.php?aksi=edit&nomor_rekam=<?php echo $dt['nomor_rekam'] ?>"> Edit </a> 
-<a href="<?php echo $url ?>pasien.php?aksi=hapus&nomor_rekam=<?php echo $dt['nomor_rekam'] ?>" onclick="return confirm('Yakin hapus data ini ? ')"> Hapus </a>  </td>
+<td> <?php echo $dt['jenis_kelamin'] ?> </td>
+<td> <a href="<?php echo $url ?>edit_pasien.php?aksi=edit&nomor_rekam=<?php echo $dt['nomor_rekam'] ?>"> Edit </a> 
+<a href="<?php echo $url ?>proses_admin.php?aksi=hapuspasien&nomor_rekam=<?php echo $dt['nomor_rekam'] ?>" onclick="return confirm('Yakin hapus data ini ? ')"> Hapus </a>  </td>
 </tr>
 
 <?php } ?>
