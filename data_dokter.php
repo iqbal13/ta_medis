@@ -48,8 +48,8 @@ $runn = mysqli_query($db,"SELECT * FROM jadwal_praktik LEFT JOIN waktu_praktik O
  } ?>
 
 </td>
-<td> <a href="<?php echo $url ?>dokter.php?aksi=edit&nomor_rekam=<?php echo $dt['id_dokter'] ?>"> Edit </a> 
-<a href="<?php echo $url ?>pasien.php?aksi=hapus&nomor_rekam=<?php echo $dt['id_dokter'] ?>" onclick="return confirm('Yakin hapus data ini ? ')"> Hapus </a>  </td>
+<td> <a href="<?php echo $url ?>edit_dokter.php?aksi=editdokter&kode_dokter=<?php echo $dt['id_dokter'] ?>"> Edit </a> 
+<a href="<?php echo $url ?>proses_admin.php?aksi=hapusdokter&kode_dokter=<?php echo $dt['id_dokter'] ?>" onclick="return confirm('Yakin hapus data ini ? ')"> Hapus </a>  </td>
 </tr>
 
 <?php } ?>
